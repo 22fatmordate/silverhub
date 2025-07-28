@@ -14,15 +14,10 @@ return function()
     mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
     mainFrame.Active = true
     mainFrame.Draggable = true
-    mainFrame.Visible = true
 
-    local corner = Instance.new("UICorner", mainFrame)
-    corner.CornerRadius = UDim.new(0, 12)
+    Instance.new("UICorner", mainFrame).CornerRadius = UDim.new(0, 12)
 
-    local shadow = Instance.new("UIStroke", mainFrame)
-    shadow.Thickness = 2
-    shadow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    shadow.Color = Color3.fromRGB(40, 255, 190)
+    Instance.new("UIStroke", mainFrame).Color = Color3.fromRGB(40, 255, 190)
 
     local title = Instance.new("TextLabel", mainFrame)
     title.Text = "Silver Hub"
@@ -33,7 +28,7 @@ return function()
     title.Size = UDim2.new(1, 0, 0, 40)
     title.Position = UDim2.new(0, 0, 0, 10)
 
-    local function createToggleButton(name, yPosition, defaultState, callback)
+    function createToggleButton(name, yPosition, defaultState, callback)
         local button = Instance.new("TextButton", mainFrame)
         button.Size = UDim2.new(0.8, 0, 0, 40)
         button.Position = UDim2.new(0.1, 0, 0, yPosition)
@@ -43,16 +38,10 @@ return function()
         button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
         button.TextColor3 = Color3.fromRGB(200, 255, 255)
         button.BorderSizePixel = 0
-
-        local corner = Instance.new("UICorner", button)
-        corner.CornerRadius = UDim.new(0, 8)
+        Instance.new("UICorner", button).CornerRadius = UDim.new(0, 8)
 
         local enabled = defaultState or false
-
-        if callback then
-            pcall(callback, enabled)
-        end
-
+        pcall(callback, enabled)
         button.MouseButton1Click:Connect(function()
             enabled = not enabled
             button.Text = name .. ": " .. (enabled and "ON" or "OFF")
@@ -61,5 +50,6 @@ return function()
     end
 
     createToggleButton("Show Circle", 60, true, function(b) getgenv().HienThiVongTron = b end)
-    createToggleButton("Direction Lines", true, 110, function(a) getgenv().directionlines = a end)
+
+    createToggleButton("Direction Lines", 110, true, function(a) getgenv().directionlines = a end)
 end
