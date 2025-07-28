@@ -1,13 +1,16 @@
 local github = "https://raw.githubusercontent.com/22fatmordate/silverhub/refs/heads/main/source/"
 local _name = "module.lua"
+local _function = "Function.lua"
 
 _G.modules = loadstring(game:HttpGet(github.._name))()
+_G.func = loadstring(game:HttpGet(github.._function))()
 
 local Players = _G.modules.Players
 local RunService = _G.modules.RunService
 local VirtualInputManager = _G.modules.VirtualInputManager
 local player = _G.modules.player
 local adornedPlayers = _G.modules.adornedPlayers
+local f = _G.func
 
 return function()
 	local function getPlayersInCircle(centerPosition, radius)
@@ -230,8 +233,8 @@ return function()
 			if now - lastUpdate < updateInterval then return end
 			lastUpdate = now
 
-			local haki = CheckHaki()
-			local v4 = Ken()
+			local haki = f.CheckHaki()
+			local v4 = f.Ken()
 
 			local hakiColor = (haki == "ON") and "rgb(0,255,0)" or "rgb(255,0,0)"
 			local v4Color = (v4 == "ON") and "rgb(251,251,140)" or "rgb(255,0,0)"
