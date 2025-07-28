@@ -6,5 +6,8 @@ local fuckingtable = {
     load3d = loadstring(game:HttpGet(github.._3some))()
 }
 
+getgenv().HienThiVongTron = true
+getgenv().directionlines = true
+
 fuckingtable.loadinit()
 fuckingtable.load3d()
