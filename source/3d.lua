@@ -108,7 +108,11 @@ return function()
 					adornFolder:Destroy()
 				end
 				adornedPlayers[targetPlayer] = nil
-				if conn then conn:Disconnect() end
+				if conn then
+					-- anti override
+					conn:Disconnect()
+					conn = nil
+				end
 				return
 			end
 
@@ -130,11 +134,6 @@ return function()
 				if evadeText.Text ~= newText then
 					evadeText.Text = newText
 				end
-
-				local h = (tick() * 0.5) % 1.2
-				local color = Color3.fromHSV(h, 1, 1)
-				ring2.Color3 = color
-				cone.Color3 = color
 			end
 		end)
 	end
